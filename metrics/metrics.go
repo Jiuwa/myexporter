@@ -2,6 +2,7 @@ package metrics
 
 import (
 	"github.com/prometheus/client_golang/prometheus"
+	"github.com/shirou/gopsutil/cpu"
 	"time"
 )
 
@@ -60,6 +61,6 @@ func (t *RequestLatency) Observe() {
 // RequestIncrease increases the counter of request handled by this service
 func RequestIncrease() {
 	requestCount.WithLabelValues().Add(1)
-	cpuC, _:= cpu.Percent(time.Second, false)
+	cpuC, _:= cpu.Percent(time.Second, false)//CPU使用
 	cpuCount.Set(cpuC[0])
 }
